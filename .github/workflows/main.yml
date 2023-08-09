@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+env:
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  DEBUG: True
+  ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+  
 jobs:
   lint:
     runs-on: ubuntu-latest
