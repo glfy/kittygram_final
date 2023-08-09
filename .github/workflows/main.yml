@@ -97,7 +97,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Get Commit SHA
         id: commit-sha
-        run: echo "sha=$(git rev-parse --short HEAD)" >> "$GITHUB_ENV"
+        run: echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_STATE
       - name: Push backend Docker image
         uses: docker/build-push-action@v2
         with:
@@ -111,7 +111,9 @@ jobs:
         with:
           context: ./frontend/
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/kittygram_frontend:latest,${{ steps.commit-sha.outputs.sha }}
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/kittygram_frontend:latest
+            ${{ secrets.DOCKER_USERNAME }}/kittygram_frontend:${{ steps.commit-sha.outputs.sha }} 
 
   build_gateway_and_push_to_docker_hub:
     name: Push gateway Docker image to DockerHub
