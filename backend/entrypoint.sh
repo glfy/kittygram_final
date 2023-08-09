@@ -1,5 +1,5 @@
 #!/bin/bash
 
-python manage.py migrate
-python manage.py collectstatic
-cp -rf /app/collected_static/. /static/static/ 
+sudo docker-compose -f docker-compose.production.yml exec backend python manage.py migrate
+sudo docker-compose -f docker-compose.production.yml exec backend python manage.py collectstatic
+sudo docker-compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /static/static/
