@@ -103,7 +103,9 @@ jobs:
         with:
           context: ./backend/
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/kittygram_backend:latest,${{ steps.commit-sha.outputs.sha }}
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/kittygram_backend:latest
+            ${{ secrets.DOCKER_USERNAME }}/kittygram_backend:${{ steps.commit-sha.outputs.sha }} 
       - name: Push frontend Docker image
         uses: docker/build-push-action@v2
         with:
