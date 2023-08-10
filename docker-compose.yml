@@ -18,7 +18,6 @@ services:
     volumes:
       - static:/static
       - media:/app/media/
-    entrypoint: [ "./entrypoint.sh" ]
     depends_on:
       - db
   frontend:
